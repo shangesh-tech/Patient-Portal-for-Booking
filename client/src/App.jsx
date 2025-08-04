@@ -1,12 +1,55 @@
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Registration from './components/Registration';
+import LabTests from './components/LabTests';
+import BookingsHistory from './components/BookingsHistory';
+import Dashboard from './components/Dashboard';
+import Navbar from './components/Navbar';
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
 
 function App() {
-
   return (
-   <h1 className='text-3xl font-bold underline text-center mt-10 text-blue-600'>
-    Patient Portal for Booking
-   </h1>
-  )
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Registration />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/tests" 
+            element={
+              <ProtectedRoute>
+                <LabTests />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/history" 
+            element={
+              <ProtectedRoute>
+                <BookingsHistory />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
