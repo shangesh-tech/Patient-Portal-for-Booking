@@ -7,7 +7,6 @@ const testRoutes = require('./routes/tests');
 const bookingRoutes = require('./routes/bookings');
 const authMiddleware = require('./middleware/auth.middleware');
 require('dotenv').config();
-
 const app = express();
 app.use(cors(
   { origin: 'https://patient-portal-for-booking.vercel.app/',
@@ -23,7 +22,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 // Testing server response
-app.router('/',(req, res) => {
+app.get('/',(req, res) => {
   res.send('Welcome to the Patient Portal API');
 });
 
