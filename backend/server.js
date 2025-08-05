@@ -9,7 +9,7 @@ const authMiddleware = require('./middleware/auth.middleware');
 require('dotenv').config();
 const app = express();
 app.use(cors(
-  { origin: 'https://patient-portal-for-booking.vercel.app/',
+  { origin: 'https://patient-portal-for-booking.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   }
