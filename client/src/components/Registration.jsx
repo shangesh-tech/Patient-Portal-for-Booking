@@ -42,22 +42,38 @@ const Registration = () => {
     setLoading(true);
     try {
       const url = isLogin ? `${apiUrl}/api/auth/login` : `${apiUrl}/api/auth/register`;
-      const res = await axios.post(url, formData);
-      localStorage.setItem('token', res.data.token);
-      
-      setMessage({
-        text: isLogin ? 'Login successful!' : 'Registration successful!',
-        type: 'success'
+      const res = await axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
-      
-      if (isLogin) {
-        setTimeout(() => navigate('/dashboard'), 1000);
+
+      if (res.data.token) {
+        localStorage.setItem('token', res.data.token);
+        
+        // Verify the token was stored
+        const storedToken = localStorage.getItem('token');
+        if (!storedToken) {
+          throw new Error('Failed to store authentication token');
+        }
+
+        setMessage({
+          text: isLogin ? 'Login successful!' : 'Registration successful!',
+          type: 'success'
+        });
+        
+        if (isLogin) {
+          setTimeout(() => navigate('/dashboard'), 1000);
+        } else {
+          setIsLogin(true);
+        }
       } else {
-        setIsLogin(true);
+        throw new Error('No token received from server');
       }
     } catch (err) {
+      console.error('Auth error:', err);
       setMessage({
-        text: err.response?.data?.msg || 'An error occurred. Please try again.',
+        text: err.response?.data?.msg || err.message || 'An error occurred. Please try again.',
         type: 'error'
       });
     } finally {
