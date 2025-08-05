@@ -1,6 +1,15 @@
 # Patient-Portal-for-Booking
 ## Introduction
 This project is a patient portal for booking appointments and managing medical records.
+
+## Frontend URL
+
+[https://patient-portal-for-booking.vercel.app/](https://patient-portal-for-booking.vercel.app/)
+
+## Backend URL
+
+[https://patient-portal-for-booking.onrender.com](https://patient-portal-for-booking.onrender.com)
+
 ## Features
 * Patient registration and login
 * Booking appointments
@@ -27,3 +36,5 @@ This project is a patient portal for booking appointments and managing medical r
 
 ## License
 This project is licensed under the MIT License. See LICENSE for details.
+
+
