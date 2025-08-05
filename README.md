@@ -4,11 +4,15 @@ This project is a patient portal for booking appointments and managing medical r
 
 ## Frontend URL
 
-[https://patient-portal-for-booking.vercel.app/](https://patient-portal-for-booking.vercel.app/)
+[Frontend URL](https://patient-portal-for-booking.vercel.app/)
 
 ## Backend URL
 
-[https://patient-portal-for-booking.onrender.com](https://patient-portal-for-booking.onrender.com)
+[Backend URL](https://patient-portal-for-booking.onrender.com)
+
+## Video
+
+[Video URL](https://drive.google.com/file/d/1TdWdlAXJtBu0JwOzri2U8mVYM3YSeaH9/view?usp=sharing)
 
 ## Features
 * Patient registration and login
