@@ -6,6 +6,8 @@ import { QuickActionCard } from './QuickActionCard';
 const Dashboard = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const apiUrl = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     const fetchUserProfile = async () => {

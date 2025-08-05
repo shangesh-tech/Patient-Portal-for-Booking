@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const LabTests = () => {
   const [tests, setTests] = useState([]);
   const [error, setError] = useState('');
+  const apiUrl = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -19,16 +22,21 @@ const LabTests = () => {
     fetchTests();
   }, []);
 
-  const handleBook = async (testId) => {
-    try {
-      await axios.post('http://localhost:5000/api/bookings/book', { testId }, {
+const handleBook = async (testId) => {
+  try {
+    await axios.post(
+      `${apiUrl}/api/bookings/book`, 
+      { testId }, 
+      {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      alert('Test booked successfully!');
-    } catch (err) {
-      setError('Booking failed');
-    }
-  };
+      }
+    );
+    toast.success('Test booked successfully!');
+  } catch (err) {
+    toast.error('Booking failed. Please try again.');
+  }
+};
+
 
   return (
     <div className="max-w-4xl mx-auto mt-10">

@@ -5,6 +5,7 @@ import LabTests from './components/LabTests';
 import BookingsHistory from './components/BookingsHistory';
 import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
+import { Toaster } from 'react-hot-toast';
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -18,6 +19,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
+        <Toaster position="top-right" />
         <Navbar />
         <Routes>
           <Route path="/" element={<Registration />} />

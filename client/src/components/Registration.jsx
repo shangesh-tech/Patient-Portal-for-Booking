@@ -10,6 +10,8 @@ const Registration = () => {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({ text: '', type: '' });
   const [loading, setLoading] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
+
 
   const validate = () => {
     const newErrors = {};
