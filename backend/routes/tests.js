@@ -2,7 +2,7 @@ const express = require('express');
 const Test = require('../models/Test');
 const router = express.Router();
 
-// Seed some dummy tests (run once manually if needed)
+// Seed some dummy tests
 const seedTests = async () => {
   if (await Test.countDocuments() === 0) {
     await Test.insertMany([

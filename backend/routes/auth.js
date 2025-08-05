@@ -1,13 +1,14 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const Patient = require('../models/Patient');
+const authMiddleware = require('../middleware/auth.middleware');
 const router = express.Router();
 
 // Register
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const patient = new Patient({ name, email, password }); // Note: In production, hash password!
+    const patient = new Patient({ name, email, password });
     await patient.save();
     res.json({ msg: 'Patient registered' });
   } catch (err) {
@@ -24,12 +25,10 @@ router.post('/login', async (req, res) => {
   res.json({ token });
 });
 
-router.get('/profile', async (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(401).json({ msg: 'Unauthorized' });
-
+router.get('/profile',authMiddleware, async (req, res) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = req.user;
+    if (!decoded) return res.status(401).json({ msg: 'Unauthorized' });
     const patient = await Patient.findById(decoded.id).select('-password');
     if (!patient) return res.status(404).json({ msg: 'Patient not found' });
     res.json(patient);
