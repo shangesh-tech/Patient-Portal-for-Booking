@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
 const authRoutes = require('./routes/auth');
 const testRoutes = require('./routes/tests');
 const bookingRoutes = require('./routes/bookings');
