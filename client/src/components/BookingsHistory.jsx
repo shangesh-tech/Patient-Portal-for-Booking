@@ -4,11 +4,12 @@ import axios from 'axios';
 const BookingsHistory = () => {
   const [bookings, setBookings] = useState([]);
   const [error, setError] = useState('');
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/bookings/history', {
+        const res = await axios.get(`${apiUrl}/api/bookings/history`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setBookings(res.data);
@@ -21,7 +22,7 @@ const BookingsHistory = () => {
 
   const handleDownload = async (bookingId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/bookings/report/${bookingId}`, {
+      const res = await axios.get(`${apiUrl}/api/bookings/report/${bookingId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         responseType: 'blob',
       });

@@ -39,7 +39,7 @@ const Registration = () => {
     
     setLoading(true);
     try {
-      const url = isLogin ? 'http://localhost:5000/api/auth/login' : 'http://localhost:5000/api/auth/register';
+      const url = isLogin ? `${apiUrl}/api/auth/login` : `${apiUrl}/api/auth/register`;
       const res = await axios.post(url, formData);
       localStorage.setItem('token', res.data.token);
       

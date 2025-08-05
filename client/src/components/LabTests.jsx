@@ -8,7 +8,7 @@ const LabTests = () => {
   useEffect(() => {
     const fetchTests = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/tests', {
+        const res = await axios.get(`${apiUrl}/api/tests`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setTests(res.data);
